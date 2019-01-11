@@ -78,6 +78,14 @@ pipenv sync
 $(pipenv --py) $SCRIPT
 ```
 
+### Testing
+```
+cd k8s_prometheus_operator
+export PYTHONPATH=$(dirname $(pwd))
+$(pipenv --py) -m unittest tests.py
+```
+
 ### Short Comings
 This setup has not been tested with multiple applications on differing ports or on different namespaces.
 Results are not guaranteed.  If you test/implement this case update the documentation here.
+
