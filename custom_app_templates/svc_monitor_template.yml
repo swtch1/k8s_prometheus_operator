@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: servicemonitor
+  namespace: ((NAMESPACE))
+  labels:
+    # must match what is defined in the prometheus resource at spec.serviceMonitorSelector.matchLabels or servicemonitor
+    # will never be recognized by prometheus
+    # `kubectl get prometheus --namespace default`
+    scraper: prometheus
+spec:
+  selector:
+    matchLabels:
+      scraper: prometheus
+  endpoints:
+  - port: service

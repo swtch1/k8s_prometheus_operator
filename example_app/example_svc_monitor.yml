@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: servicemonitor
+  labels:
+    scraper: prometheus
+spec:
+  selector:
+    matchLabels:
+      scraper: prometheus
+  endpoints:
+  # port name from service that matches matchLabels
+  - port: web

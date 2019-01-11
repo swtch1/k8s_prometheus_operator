@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  # rename if targeting more than one application in a single namespace
+  name: prometheus-target
+  namespace: ((NAMESPACE))
+  labels:
+    # label that servicemonitor will select
+    app: grafana
+    # must match what is defined in the prometheus resource at spec.serviceMonitorSelector.matchLabels or servicemonitor
+    # will never find targets
+    # `kubectl get prometheus --namespace default`
+    scraper: prometheus
+spec:
+  type: LoadBalancer
+  ports:
+  - name: service
+    # port that your custom application is listening on inside the container
+    targetPort: ((APPLICATION_PORT))
+    port: ((APPLICATION_PORT))
+    protocol: TCP
+  selector:
+    # one or more label key value pair that match that of your application pods
+    ((SELECTOR_KEY)): ((SELECTOR_VALUE))

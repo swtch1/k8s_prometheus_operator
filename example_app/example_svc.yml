@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: example-app
+  labels:
+    app: example-app
+    scraper: prometheus
+spec:
+  type: LoadBalancer
+  selector:
+    app: example-app
+  ports:
+  # must be a named port, reference in servicemonitor
+  - name: web
+    port: 8080
